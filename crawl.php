@@ -7,6 +7,8 @@
 // Crawl Engine: A class created to help in the simplification of scraping Websites using Regex
 // Helper Class Includes Find Params
 class FindParams {
+	//Find Params Class
+	// A Class Created to make storing and passing of parameters to be searched for in Crawl Engine Easier....
 	
 	private $index_of_search;
 	private $tags = array();
@@ -250,12 +252,9 @@ class CrawlEngine {
 		
 	}
 	
-	
-	public function get_info($params = array()) {
-		$this->access_page();
+	public static function process_info($params, $content) {
 		$regs = array();
 		$reply = array();
-		
 		foreach($params as $param) {
 			if(!is_a($param, FindParams::$class_name)) {
 				continue;
@@ -283,18 +282,28 @@ class CrawlEngine {
 				$i++;
 			}
 			$reg = "/{$tag_string}{$att_string}/m";
-			preg_match_all($reg, $this->get_page_content, $matches);
+			preg_match_all($reg, $content, $matches);
+			if(empty($matches[0])){continue;}
 			$index = ($param->get_search_index() - 1);
 			
 			if(is_array($matches[1])) {
 				$reply[] = $matches[1][$index];
-				echo $matches[1][$index];
 			} else {
 				$reply[] = $matches[1];
-				echo $matches[1];
 			}
 		}
-		return $reply;
+		return $reply;		
+
+	}
+		
+	
+	public static function get_offline_info($params, $url) {
+		return self::process_info($params, self::get_page_content($url));
+	}
+	
+	public function get_info($params = array()) {
+		$this->access_page();
+		return self::process_info($params, $this->get_page_content);
 	}
 }
 

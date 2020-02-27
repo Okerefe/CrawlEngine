@@ -1,49 +1,60 @@
 <?php
 require_once('crawl.php');
-ini_set('max_execution_time', '30000');
-// $engine = new CrawlEngine("https://www.scalablepath.com/login", "https://www.scalablepath.com/login");
-$engine = new CrawlEngine("https://example.org/login/", "https://example.org/login/", "https://example.org/profile/");
-
-// 
 
 
+// Test for CrawlEngine's Login and Crawl Feature........................................................
 
-$engine->add_login_details('uid', 'example@gmail.com');
-$engine->add_login_details('pwd', 'testpassword');
+$engine = new CrawlEngine("http://crawlengine.atwebpages.com/", "http://crawlengine.atwebpages.com/", "http://crawlengine.atwebpages.com/");
+
+$engine->add_login_details('username', 'example@gmail.com');
+$engine->add_login_details('password', 'examplepassword');
 
 
 
 $param_1 = new FindParams();
-$param_1->set_tag("td");
-$param_1->set_attribute(['align' => 'left']);
-$param_1->set_attribute(['valign' => 'bottom']);
+$param_1->set_tag("h3");
+$param_1->set_attribute(['id' => 'full_name']);
+$param_1->set_attribute(['class' => 'name']);
 $param_1->set_search_index(1);
 
 $param_2 = new FindParams();
-$param_2->set_tag("td");
-$param_2->set_attribute(['align' => 'left']);
-$param_2->set_attribute(['valign' => 'bottom']);
-$param_2->set_search_index(2);
+$param_2->set_tag("h3");
+$param_2->set_attribute(['id' => 'prof']);
+$param_2->set_attribute(['class' => 'name']);
+$param_2->set_search_index(1);
 
-$param_3 = new FindParams();
-$param_3->set_tag("td");
-$param_3->set_attribute(['align' => 'left']);
-$param_3->set_attribute(['valign' => 'bottom']);
-$param_3->set_search_index(3);
 
 $searches = array();
 $searches[] = $param_1;
 $searches[] = $param_2;
-$searches[] = $param_3;
 
-// print_r($searches);
+// // print_r($searches);
 $reply = $engine->get_info($searches);
 print_r($reply);
 
-// print_r($engine->input_fields);
-// print_r($engine->populated_fields);
 
-// echo $engine->get_login();
+// Test for CrawlEngine's Static Crawl Feature........................................................
+
+$param_static = new FindParams();
+$param_static->set_tag("p");
+$param_static->set_attribute(['id' => 'function']);
+$param_static->set_search_index(1);
+
+$param_static_2 = new FindParams();
+$param_static_2->set_tag("p");
+$param_static_2->set_attribute(['id' => 'about_us']);
+$param_static_2->set_search_index(1);
+
+
+
+
+$static_params = array();
+$static_params[] = $param_static;
+$static_params[] = $param_static_2;
+
+$ans = CrawlEngine::get_offline_info($static_params, "http://crawlengine.atwebpages.com/");
+print_r($ans);
+
 exit;
 
 
