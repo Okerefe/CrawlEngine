@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <form id="form" method="post" action="">
+            <input
+            type="text" id="uid" name="uid" class="form-control"
+             placeholder="Reg/ Matric No" required=""  />
+            <Input type="text" id="pwd" name='pwd' class="form-control" placeholder="Password" required=""
+             />
+            <input type="text" id="pwd" name='
+            pwd1' value='' class="form-control" placeholder="Password" required=""  />
+            <input type="text" id="pwd" name="pwd2" value="" class="form-control" placeholder="Password" required=""  />
+            <input type="password" id="pwd" value="fff" name="pwd3"  class="form-control" placeholder="Password" required=""  />
+            <input type="password" id="pwd" value='' name='pwd4' class="form-control" placeholder="Password" required=""  />
+            <input name="__RequestVerificationToken" type="hidden" value="nm70tXwNLHLRAWUwW1hNNnL97LMQv1ypgOVbftYL-HChLxH_dAzOjgR8yiQiIobitinZBkRj_nmwJLV8yGSYdJlOSHy7KFGIbB8kmtCW3lM1" />
+            <input type="submit" name="submit" id="submit" value="Login" class="btn btn-primary"  />
+        </form>
+    </body>
+</html>
