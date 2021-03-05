@@ -352,7 +352,7 @@ class Engine
                     'form_params' => $formData,
                 ]
             );
-            return $this->getAllCrawlers($client, $contentPagesUri);
+            return $this->getAllCrawlers($client, $submitUri, $contentPagesUri);
         } catch (CrawlEngineException $e){
             throw $e;
         } catch (GuzzleException $e){
@@ -386,7 +386,7 @@ class Engine
      * @throws CrawlEngineException               Thrown When Request to given page is not successful
      * @return Crawler[]
      */
-    public function getAllCrawlers(Client &$client, array $pagesUrl) : array
+    public function getAllCrawlers(Client &$client, $submitUri, array $pagesUrl) : array
     {
         $crawlers = [];
         foreach ($pagesUrl as $pageUrl) {
@@ -395,7 +395,7 @@ class Engine
                     'GET',
                     $pageUrl,
                     [
-                        'headers' => $this->headers(),
+                        'headers' => $this->headers(0, $submitUri),
                     ]
                 ))->getBody();
                 $crawlers[] = $this->crawler($pageContent);
