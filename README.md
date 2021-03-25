@@ -227,6 +227,7 @@ The main function responsible for resolving requests is the resolveRequest Metho
 // First we need to add the namespace
 use CrawlEngine\InputDetail;
 use CrawlEngine\CrawlEngine;
+use CrawlEngine\Engine;
 
 // we then create instances of the inputDetail class to carry values the form needs as follows:
 $emailInput = new InputDetail('email', 'johndoe@mymail.com');
